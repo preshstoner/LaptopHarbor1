@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       title: 'Parcel App',
       debugShowCheckedModeBanner: false,
       theme: ParcelAppTheme.getLightTheme,
-      home: const HomeScreen(),
+      home: const HomeScreen(title: 'Laptop Harbor'),
     );
   }
 }

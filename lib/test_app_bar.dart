@@ -2,27 +2,28 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class TestAppBar extends StatefulWidget {
-  const TestAppBar({Key? key}) : super(key: key);
+  const TestAppBar({super.key, required this.title});
+  final String title;
 
   @override
   State<TestAppBar> createState() => _TestAppBarState();
 }
 
 class _TestAppBarState extends State<TestAppBar> {
-  late ScrollController _scrollController;
+  late ScrollController scrollController;
 
   double _scrollControlOffset = 0.0;
 
-  _scrollListener() {
+  void _scrollListener() {
     setState(() {
-      _scrollControlOffset = _scrollController.offset;
+      _scrollControlOffset = scrollController.offset;
     });
   }
 
   @override
   void initState() {
-    _scrollController = ScrollController();
-    _scrollController.addListener(_scrollListener);
+    final ScrollController scrollController = ScrollController();
+    scrollController.addListener(_scrollListener);
     super.initState();
   }
 
@@ -45,7 +46,7 @@ class _TestAppBarState extends State<TestAppBar> {
           children: [
             SafeArea(
               child: CustomScrollView(
-                controller: _scrollController,
+                controller: scrollController,
                 slivers: [
                   SliverList(
                       delegate: SliverChildBuilderDelegate(
@@ -79,9 +80,9 @@ class _TestAppBarState extends State<TestAppBar> {
 class FadeAppBar extends StatelessWidget {
   final double scrollOffset;
   const FadeAppBar({
-    Key? key,
+   super.key,
     required this.scrollOffset,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -93,8 +94,8 @@ class FadeAppBar extends StatelessWidget {
           horizontal: 24,
           vertical: 10,
         ),
-        color: Colors.white.withOpacity(
-          (scrollOffset / 350).clamp(0, 1).toDouble(),
+        color: Colors.white.withAlpha(
+          (scrollOffset / 350).clamp(0, 1).round(),
         ),
         child: SafeArea(
           child: Container(
@@ -102,7 +103,7 @@ class FadeAppBar extends StatelessWidget {
             decoration: BoxDecoration(
               boxShadow: [
                 BoxShadow(
-                  color: Colors.grey.withOpacity(0.1),
+                  color: Colors.grey.withAlpha((0.5 * 255).round()),
                   blurRadius: 50,
                   spreadRadius: 0,
                   offset: const Offset(12, 265),
@@ -137,13 +138,13 @@ class FadeAppBar extends StatelessWidget {
                   ),
                   child: Icon(
                     Icons.notifications_none_outlined,
-                    color: Colors.black.withOpacity(0.6),
+                    color: Colors.black.withAlpha((0.5 * 255).round()),
                     size: 20,
                   ),
                 ),
                 Icon(
                   Icons.shopping_cart_outlined,
-                  color: Colors.black.withOpacity(0.6),
+                  color: Colors.black.withAlpha((0.5 * 255).round()),
                   size: 18,
                 ),
               ],

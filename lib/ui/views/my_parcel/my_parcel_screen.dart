@@ -14,7 +14,7 @@ class MyParcelScreen extends StatelessWidget {
           title: Padding(
             padding: const EdgeInsets.only(left: 24),
             child: Text(
-              'Track Parcel',
+              'Laptop Harbor',
               style: Theme.of(context).textTheme.displayLarge,
             ),
           ),
@@ -23,16 +23,16 @@ class MyParcelScreen extends StatelessWidget {
           snap: false,
           pinned: true,
           titleSpacing: 0.0,
-          actions: [
-            Padding(
-              padding: const EdgeInsets.only(right: 24),
-              child: CircleAvatar(
-                child: ClipOval(
-                  child: Image.network(ImageUtils.icProfile),
-                ),
-              ),
-            ),
-          ],
+          // actions: [
+          //   Padding(
+          //     padding: const EdgeInsets.only(right: 24),
+          //     child: CircleAvatar(
+          //       child: ClipOval(
+          //         child: Image.network(ImageUtils.icProfile),
+          //       ),
+          //     ),
+          //   ),
+          // ],
           shadowColor: Colors.transparent,
           expandedHeight: 316,
           backgroundColor: Theme.of(context).appBarTheme.backgroundColor,

@@ -4,7 +4,8 @@ import 'package:flutter_parcel_app/ui/views/views.dart';
 import 'package:flutter_parcel_app/ui/widgets/widgets.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({super.key, required this.title});
+  final String title;
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
