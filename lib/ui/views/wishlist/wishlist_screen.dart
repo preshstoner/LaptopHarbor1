@@ -50,19 +50,10 @@ class WishListScreen extends StatelessWidget{
           final product = products[index];
 
           //Build a Parcel object from product data
-          final parcel = Parcel(
-            size: 'Medium',
-            image: product['image']!,
-            dimension: '14 inch',
-            description: product['name']!,
-          );
+          final parcel = ParcelData.parcelList[1];
 
           //Provide a default DeliveryMethod
-          final deliveryMethod = DeliveryMethod(
-            deliveryMethod: 'Standard Delivery',
-            duration: '3-5 days',
-            image: 'assets/image/delivery.png',
-          );
+          final deliveryMethod = DeliveryData.deliveryMethods[0];
           return Card(
             margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: ListTile(
@@ -87,8 +78,15 @@ class WishListScreen extends StatelessWidget{
                         context,
                         MaterialPageRoute(
                           builder: (_) => CartScreen(
-                              selectedParcel: parcel,
-                              selectedDeliverymethod: deliveryMethod,
+                            selectedParcel: parcel,
+                            selectedDeliverymethod: deliveryMethod,
+                            initialItem: {
+                              'name': product['name']!,
+                              'price': int.parse(
+                                product['price']!.replaceAll(RegExp(r'[^0-9]'), ''),
+                              ),
+                              'quantity': 1
+                            },
                           ),
                         ),
                     );

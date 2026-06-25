@@ -7,11 +7,13 @@ import 'package:flutter_parcel_app/ui/widgets/widgets.dart';
 class CartScreen extends StatefulWidget{
   final Parcel selectedParcel;
   final DeliveryMethod selectedDeliverymethod;
+  final Map<String, dynamic>? initialItem; // new parameter
 
   const CartScreen ({
     super.key,
     required this.selectedParcel,
     required this.selectedDeliverymethod,
+    this.initialItem
   });
 
   @override
@@ -19,14 +21,20 @@ class CartScreen extends StatefulWidget{
 }
 
 class _CartScreenState extends State<CartScreen>{
-  final List<Map<String, dynamic>> cartItems = [
-    {'name': 'Dell XPS 15', 'price': 85000, 'quantity': 1},
-    {'name': 'Logitech MX Master 3', 'price': 45000, 'quantity': 2},
-    {'name': 'Laptop Backpack 15.6"', 'price': 20500, 'quantity': 1},
-  ];
+  List<Map<String, dynamic>> cartItems = [];
 
   double shippingFee = 5000;
   double taxRate = 0.075;
+
+  @override
+  void initState(){
+    super.initState();
+    // add initail item if passed
+    final initial = widget.initialItem;
+    if (initial != null){
+      cartItems.add(initial);
+    }
+  }
 
   void _updateQuantity(int index, int change){
     setState(() {
@@ -51,35 +59,39 @@ class _CartScreenState extends State<CartScreen>{
       body: Column(
         children: [
           Expanded(
-            child: ListView.builder(
-              itemCount: cartItems.length,
-              itemBuilder: (context, index){
-                final item = cartItems[index];
-                return Card(
-                  margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                  child: ListTile(
-                    leading: const Icon(Icons.laptop),
-                    title: Text(item['name']),
-                    subtitle: Text('₦${item['price']}'),
-                    trailing: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        IconButton(
-                          icon: const Icon(Icons.remove),
-                          onPressed: () => _updateQuantity(index, -1),
+            child: cartItems.isEmpty
+                ? const Center(child: Text('Your cart is empty'))
+                : ListView.builder(
+                    itemCount: cartItems.length,
+                    itemBuilder: (context, index){
+                      final item = cartItems[index];
+                      return Card(
+                        margin: const EdgeInsets.symmetric(
+                          horizontal: 16, vertical: 8),
+                        child: ListTile(
+                          leading: const Icon(Icons.laptop),
+                          title: Text(item['name']),
+                          subtitle: Text('${item['price']}'),
+                          trailing: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              IconButton(
+                                  icon: const Icon(Icons.remove),
+                                  onPressed: () => _updateQuantity(index, -1),
+                              ),
+                              Text('${item['quantity']}'),
+                              IconButton(
+                                icon: const Icon(Icons.add),
+                                onPressed: () => _updateQuantity(index, 1),
+                              ),
+                            ],
+                          ),
                         ),
-                        Text('${item['quantity']}'),
-                        IconButton(
-                          icon: const Icon(Icons.add),
-                          onPressed: () => _updateQuantity(index, 1),
-                        ),
-                      ],
-                    ),
+                      );
+                    },
                   ),
-                );
-              },
-            ),
-          ),
+
+        ),
 
           //Promo code section
           Padding(
@@ -116,7 +128,9 @@ class _CartScreenState extends State<CartScreen>{
                     minimumSize: const Size.fromHeight(50),
                     backgroundColor: Colors.yellow,
                   ),
-                  onPressed: () {
+                  onPressed: cartItems.isEmpty
+                      ? null
+                      : () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -142,7 +156,8 @@ class _SummaryRow extends StatelessWidget{
   final String label;
   final double value;
   final bool bold;
-  const _SummaryRow({required this.label, required this.value, this.bold = false});
+  const _SummaryRow({
+    required this.label, required this.value, this.bold = false});
 
   @override
   Widget build(BuildContext context){
