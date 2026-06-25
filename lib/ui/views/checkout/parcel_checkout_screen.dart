@@ -3,6 +3,7 @@ import 'package:flutter_parcel_app/models/models.dart';
 import 'package:flutter_parcel_app/ui/widgets/widgets.dart';
 import 'package:flutter_parcel_app/utils/image_utils.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_parcel_app/ui/views/views.dart';
 
 class ParcelCheckboxScreen extends StatelessWidget {
   const ParcelCheckboxScreen({

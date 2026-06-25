@@ -2,12 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ParcelAppTheme {
-  static BuildContext? _context;
-
-  static void init({required BuildContext context}) {
-    _context = context;
-  }
-
   static ThemeData get getLightTheme {
     return ThemeData(
       useMaterial3: true,
@@ -76,7 +70,7 @@ class ParcelAppTheme {
           fontWeight: FontWeight.w500,
         ),
         titleLarge: GoogleFonts.poppins(
-          color: Theme.of(_context!).unselectedWidgetColor,
+          color: Colors.white,
           fontSize: 10,
           fontWeight: FontWeight.w500,
         ),
