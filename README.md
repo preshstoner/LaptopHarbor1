@@ -5,8 +5,7 @@ This project is a parcel delivery application built with Flutter for the fronten
 🚀 Getting Started
 1. Clone the Repository
 bash
-git clone https://github.com/your-org/flutter_parcel_app.git
-cd flutter_parcel_app
+git clone https://github.com/preshstoner/LaptopHarbor1.git
 2. Environment Configuration
 Create a .env file in your backend project root with the following values:
 
