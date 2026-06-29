@@ -1,8 +1,8 @@
-📦 Flutter Parcel App
+Flutter Parcel App
 Overview
 This project is a parcel delivery application built with Flutter for the frontend and a Node.js + PostgreSQL backend. It was developed using the Agile Software Development Life Cycle (SDLC), with iterative sprints, continuous feedback, and collaboration guiding the process.
 
-🚀 Getting Started
+Getting Started
 1. Clone the Repository
 bash
 git clone https://github.com/preshstoner/LaptopHarbor1.git
